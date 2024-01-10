@@ -12,7 +12,7 @@ public class Server {
 
     private ServerSocket serverSocket;
 
-    public void run () {
+    public void start () {
         try {
             serverSocket = new ServerSocket(SERVER_PORT);
             System.out.println("Ready for accepting connections!");
@@ -44,15 +44,16 @@ public class Server {
                     System.out.println(detailClient + "> " + command);
 
                     if (command.equals("PING")) {
-                            dataOut.writeUTF("PONG");
+                        dataOut.writeUTF("PONG");
                     } else if(command.equals("QUIT")) {
+                        dataOut.writeUTF("(nil)");
                         break;
                     } else {
                         dataOut.writeUTF("(error) ERR unknown command " + command + ", with args beginning with:");
                     }
                 }
 
-                System.out.println(detailClient + " >> disconnected" );
+                System.out.println(detailClient + "> disconnected" );
 
                 dataIn.close();
                 dataOut.close();
@@ -68,6 +69,6 @@ public class Server {
 
     public static void main(String[] args)  {
         Server server = new Server();
-        server.run();
+        server.start();
     }
 }

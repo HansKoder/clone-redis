@@ -5,47 +5,90 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Client {
 
-    public static void main(String[] args) throws IOException {
-        Socket socket = new Socket();
+    private final int PORT_SERVER = 6379;
+    private final int TIMEOUT = 1000;
+    private final String HOST_SERVER = "127.0.0.1";
+
+    private Socket socket;
+    private DataInputStream dataIn;
+    private DataOutputStream dataOut;
+    private Scanner sc = new Scanner(System.in);
+
+    public void connect () {
+        socket = new Socket();
 
         try {
-            socket.connect(new InetSocketAddress("127.0.0.1", 6379), 1000);
+            socket.connect(new InetSocketAddress(HOST_SERVER, PORT_SERVER), TIMEOUT);
         } catch (Exception ex) {
             System.out.println("Cannot connect to server redis " + ex.getMessage());
             System.exit(-1);
         }
+    }
 
+    private String getInfoServer() {
         int port = socket.getPort();
-        String host = socket.getLocalAddress().getHostAddress();
+        String host = socket.getInetAddress().getHostAddress();
 
-        DataInputStream dataIn = new DataInputStream(socket.getInputStream());
-        DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
+        return host + ":" + port + "> ";
+    }
 
-        Scanner sc = new Scanner(System.in);
+    private String sendMessage () throws IOException {
+        System.out.print(getInfoServer());
+        String command = sc.nextLine();
+        dataOut.writeUTF(command);
 
-        while (true) {
-            try {
-                System.out.print(host + ":" + port + "> ");
-
-                String command = sc.nextLine();
-                dataOut.writeUTF(command);
-
-                System.out.println(dataIn.readUTF());
-
-                if (command.toUpperCase().equals("QUIT")) break;
-            } catch (Exception exception) {
-                System.out.println(exception.getMessage());
-                break;
-            }
+        /*
+        if (command.toUpperCase().equals("QUIT")) {
+            System.out.println("(nil)");
+        } else {
+            System.out.println(getResponse());
         }
 
+         */
+
+        System.out.println(getResponse());
+
+        return command;
+    }
+
+    private String getResponse() throws IOException {
+        return dataIn.readUTF();
+    }
+
+    public void running ()  {
+        try {
+            dataIn = new DataInputStream(socket.getInputStream());
+            dataOut = new DataOutputStream(socket.getOutputStream());
+
+            while (true) {
+                if (sendMessage().toUpperCase().equals("QUIT")) break;
+            }
+
+            dataIn.close();
+            dataOut.close();
+            socket.close();
+
+        } catch (IOException io) {
+            System.out.println("[Err] Running " + io.getMessage());
+            io.printStackTrace();
+        }
+    }
+
+    private void closeResources () throws IOException {
         dataIn.close();
         dataOut.close();
         socket.close();
+    }
+
+    public static void main(String[] args)  {
+        Client client = new Client();
+        client.connect();
+        client.running();
     }
 
 }
