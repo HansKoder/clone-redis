@@ -5,10 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Optional;
 import java.util.Scanner;
 
-public class RedisClient {
+public class Client {
 
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket();
@@ -42,7 +41,6 @@ public class RedisClient {
                 System.out.println(exception.getMessage());
                 break;
             }
-
         }
 
         dataIn.close();
