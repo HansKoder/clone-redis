@@ -41,16 +41,6 @@ public class Client {
         System.out.print(getInfoServer());
         String command = sc.nextLine();
         dataOut.writeUTF(command);
-
-        /*
-        if (command.toUpperCase().equals("QUIT")) {
-            System.out.println("(nil)");
-        } else {
-            System.out.println(getResponse());
-        }
-
-         */
-
         System.out.println(getResponse());
 
         return command;

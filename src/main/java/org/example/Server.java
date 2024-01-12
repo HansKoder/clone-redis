@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.command.Handler;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,14 +14,19 @@ public class Server {
 
     private ServerSocket serverSocket;
 
-    public void start () {
+    private Handler handler;
+
+    public void connect () {
         try {
             serverSocket = new ServerSocket(SERVER_PORT);
             System.out.println("Ready for accepting connections!");
 
+            handler = new Handler();
+
             while (true) connecting();
 
         }catch (IOException io) {
+            System.out.println("(error) " + io.getMessage());
             io.printStackTrace();
         }
     }
@@ -40,17 +47,12 @@ public class Server {
                 System.out.println(detailClient + "> connected");
 
                 while (true) {
-                    String command = dataIn.readUTF().toUpperCase();
+                    String command = dataIn.readUTF();
                     System.out.println(detailClient + "> " + command);
 
-                    if (command.equals("PING")) {
-                        dataOut.writeUTF("PONG");
-                    } else if(command.equals("QUIT")) {
-                        dataOut.writeUTF("(nil)");
-                        break;
-                    } else {
-                        dataOut.writeUTF("(error) ERR unknown command " + command + ", with args beginning with:");
-                    }
+                    dataOut.writeUTF(handler.process(command));
+
+                    if (handler.isStop()) break;
                 }
 
                 System.out.println(detailClient + "> disconnected" );
@@ -58,7 +60,6 @@ public class Server {
                 dataIn.close();
                 dataOut.close();
                 clientSocket.close();
-
             } catch (IOException io) {
                 io.printStackTrace();
                 System.out.println(io.getMessage());
@@ -69,6 +70,6 @@ public class Server {
 
     public static void main(String[] args)  {
         Server server = new Server();
-        server.start();
+        server.connect();
     }
 }
