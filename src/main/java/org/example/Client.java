@@ -69,12 +69,6 @@ public class Client {
         }
     }
 
-    private void closeResources () throws IOException {
-        dataIn.close();
-        dataOut.close();
-        socket.close();
-    }
-
     public static void main(String[] args)  {
         Client client = new Client();
         client.connect();
