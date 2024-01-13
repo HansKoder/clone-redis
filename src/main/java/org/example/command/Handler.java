@@ -12,6 +12,7 @@ public class Handler {
         commands.put("ping", new PingCommand());
         commands.put("get", new GetCommand());
         commands.put("set", new SetCommand());
+        commands.put("del", new DelCommand());
     }
 
     public String process (String params) {

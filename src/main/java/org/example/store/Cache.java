@@ -24,4 +24,7 @@ public class Cache {
         return Cache.instance;
     }
 
+    public String del(String key) {
+        return map.remove(key);
+    }
 }
