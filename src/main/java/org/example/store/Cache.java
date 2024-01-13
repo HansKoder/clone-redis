@@ -5,15 +5,15 @@ import java.util.Optional;
 
 public class Cache {
 
-    private HashMap<String, String> cache = new HashMap<>();
+    private HashMap<String, String> map = new HashMap<>();
     private static Cache instance;
 
     public void set (String key, String value) {
-        cache.put(key, value);
+        map.put(key, value);
     }
 
     public String get (String key) {
-        return Optional.ofNullable(cache.get(key)).orElse("(nil)");
+        return map.get(key);
     }
 
     public static Cache getInstance () {
