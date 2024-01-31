@@ -13,42 +13,42 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-public class HandlerTest {
+class HandlerTest {
 
     private Handler handler;
 
     @BeforeEach
-    public void setUp () {
+    void setUp () {
         handler = new Handler();
     }
 
     @Test
-    public void shouldShowMsgErrorSinceReceivedCommandUnKnown () {
+    void shouldShowMsgErrorSinceReceivedCommandUnKnown () {
         String msg = "(error) ERR unknown command start, with args beginning with: param1 param2";
         assertEquals(msg, handler.process("start param1 param2"));
         assertFalse(handler.isStop());
     }
 
     @Test
-    public void shouldBeTrueStopping () {
+    void shouldBeTrueStopping () {
         assertEquals("", handler.process("QUIT"));
         assertTrue(handler.isStop());
     }
 
     @Test
-    public void shouldShowMsgPongSinceReceivedPingWithoutParams () {
+    void shouldShowMsgPongSinceReceivedPingWithoutParams () {
         assertEquals("PONG", handler.process("ping"));
         assertFalse(handler.isStop());
     }
 
     @Test
-    public void shouldShowMsgHelloSinceReceivedPingWithParamHello () {
+    void shouldShowMsgHelloSinceReceivedPingWithParamHello () {
         assertEquals("hello", handler.process("ping hello"));
         assertFalse(handler.isStop());
     }
 
     @Test
-    public void shouldSaveNewItemSuccessful () {
+    void shouldSaveNewItemSuccessful () {
         Cache cache = mock(Cache.class);
 
         try (MockedStatic<Cache> cacheMockedStatic = mockStatic(Cache.class)) {
@@ -63,7 +63,7 @@ public class HandlerTest {
     }
 
     @Test
-    public void shouldGetItemStored () {
+    void shouldGetItemStored () {
         Cache cache = mock(Cache.class);
 
         try (MockedStatic<Cache> cacheMockedStatic = mockStatic(Cache.class)) {

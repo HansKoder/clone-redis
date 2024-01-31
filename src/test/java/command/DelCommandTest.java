@@ -2,6 +2,7 @@ package command;
 
 import org.example.command.DelCommand;
 import org.example.store.Cache;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -10,10 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-public class DelCommandTest {
+class DelCommandTest {
 
     @Test
-    public void shouldGetErrorMsg () {
+    @DisplayName("Should Get an error message")
+    void shouldGetErrorMsg () {
         DelCommand command = new DelCommand();
 
         String msg = "(error) ERR wrong number of arguments for 'del' command";
@@ -21,7 +23,8 @@ public class DelCommandTest {
     }
 
     @Test
-    public void shouldReturnZeroItemsDeletedSinceThereIsNotAnyKeyIsStored () {
+    @DisplayName("Should return zero")
+    void shouldReturnZeroItemsDeletedSinceThereIsNotAnyKeyIsStored () {
         DelCommand command = new DelCommand();
         Cache cache = mock(Cache.class);
 
@@ -39,7 +42,7 @@ public class DelCommandTest {
     }
 
     @Test
-    public void shouldReturnTwoItemsDeleted () {
+    void shouldReturnTwoItemsDeleted () {
         DelCommand command = new DelCommand();
         Cache cache = mock(Cache.class);
 
@@ -57,7 +60,7 @@ public class DelCommandTest {
     }
 
     @Test
-    public void shouldReturnThreeItemsDeleted () {
+    void shouldReturnThreeItemsDeleted () {
         DelCommand command = new DelCommand();
         Cache cache = mock(Cache.class);
 

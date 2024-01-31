@@ -13,10 +13,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-public class SetCommandTest {
+class SetCommandTest {
 
     @Test
-    public void shouldGetErrorMsg () {
+    void shouldGetErrorMsg () {
         SetCommand command = new SetCommand();
 
         String msg = "(error) ERR wrong number of arguments for 'set' command";
@@ -24,7 +24,7 @@ public class SetCommandTest {
     }
 
     @Test
-    public void shouldAddNewItem () {
+    void shouldAddNewItem () {
         SetCommand command = new SetCommand();
         Cache cache = mock(Cache.class);
 

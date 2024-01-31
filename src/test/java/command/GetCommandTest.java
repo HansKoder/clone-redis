@@ -13,10 +13,10 @@ import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GetCommandTest {
+class GetCommandTest {
 
     @Test
-    public void shouldErrorMsgSinceItReceivesJustOneParam () {
+    void shouldErrorMsgSinceItReceivesJustOneParam () {
         GetCommand command = new GetCommand();
 
         String msg = "(error) ERR wrong number of arguments for 'get' command";
@@ -24,7 +24,7 @@ public class GetCommandTest {
     }
 
     @Test
-    public void shouldGetNameSuccessful () {
+    void shouldGetNameSuccessful () {
         GetCommand command = new GetCommand();
         Cache cache = mock(Cache.class);
 
@@ -39,7 +39,7 @@ public class GetCommandTest {
     }
 
     @Test
-    public void shouldGetNothingSinceNothingKeyIsNotFound () {
+    void shouldGetNothingSinceNothingKeyIsNotFound () {
         GetCommand command = new GetCommand();
         Cache cache = mock(Cache.class);
 

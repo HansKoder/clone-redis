@@ -1,7 +1,6 @@
 package org.example.store;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 public class Cache {
 
