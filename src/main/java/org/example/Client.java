@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Client {
 
@@ -56,16 +57,19 @@ public class Client {
         dataOut = new DataOutputStream(socket.getOutputStream());
 
         try {
-            while (true) {
+            while (socket.isConnected()) {
                 logger.info(getInfoServer());
                 String cmd = sc.nextLine();
-                sendMessage(cmd);
+                logger.info(String.format("cmd %s", cmd));
 
                 if (shouldStop(cmd)) break;
+
+                sendMessage(cmd);
             }
         } catch (IOException io) {
             logger.error(String.format("[Err] running %s", io.getMessage()));
-        } finally {
+        }
+        finally {
             dataIn.close();
             dataOut.close();
             socket.close();
