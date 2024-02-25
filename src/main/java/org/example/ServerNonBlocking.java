@@ -44,13 +44,11 @@ public class ServerNonBlocking {
                     SelectionKey key = keyIterator.next();
 
                     if (key.isAcceptable()) {
-                        try (ServerSocketChannel channel = (ServerSocketChannel) key.channel()) {
-                            SocketChannel clientChannel = channel.accept();
-                            clientChannel.configureBlocking(false);
-                            clientChannel.register(selector, SelectionKey.OP_READ);
-                            logger.printf(Level.INFO, "New connection accepted: %s ", clientChannel.getRemoteAddress());
-                        }
-
+                        ServerSocketChannel channel = (ServerSocketChannel) key.channel();
+                        SocketChannel clientChannel = channel.accept();
+                        clientChannel.configureBlocking(false);
+                        clientChannel.register(selector, SelectionKey.OP_READ);
+                        logger.printf(Level.INFO, "New connection accepted: %s ", clientChannel.getRemoteAddress());
                     } else if (key.isReadable()) {
                         SocketChannel clientChannel = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
@@ -70,7 +68,10 @@ public class ServerNonBlocking {
 
                             // Echo the message back to the client
                             String response = handler.process(message);
-                            clientChannel.write(ByteBuffer.wrap(response.getBytes(StandardCharsets.UTF_8)));
+                            logger.printf(Level.INFO,"response server %s", response);
+
+                            ByteBuffer bufferResponse = ByteBuffer.wrap(response.getBytes(StandardCharsets.UTF_8));
+                            clientChannel.write(bufferResponse);
                         }
                     }
 
