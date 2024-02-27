@@ -1,4 +1,4 @@
-package labs;
+package servers;
 
 import org.example.exceptions.CannotConnectSocketChannel;
 import org.example.exceptions.CannotRunSocketChannel;

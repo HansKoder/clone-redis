@@ -1,4 +1,4 @@
-package labs;
+package servers;
 
 public class ClientNIOTest {
 
