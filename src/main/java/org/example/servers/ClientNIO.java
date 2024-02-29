@@ -27,13 +27,13 @@ public class ClientNIO implements IServer {
     private final Scanner scanner;
 
     public ClientNIO() {
-        this(Global.SERVER_HOST, Global.SERVER_PORT);
+        this(Global.SERVER_HOST, Global.SERVER_PORT, new Scanner(System.in));
     }
 
-    public ClientNIO(String host, int port) {
+    public ClientNIO(String host, int port, Scanner scanner) {
         this.host = host;
         this.port = port;
-        this.scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     private String getHost () {
@@ -47,8 +47,8 @@ public class ClientNIO implements IServer {
     @Override
     public void connect() throws CannotConnectSocketChannel {
         try {
-            logger.printf(Level.INFO, "%s is running with successful", getHost());
             this.socketChannel = SocketChannel.open(new InetSocketAddress(host, port));
+            logger.printf(Level.INFO, "%s is running with successful", getHost());
         } catch (IOException err) {
             String msg = String.format("cannot run client socket non-blocking %s", err.getMessage());
             throw new CannotConnectSocketChannel(msg);
@@ -57,15 +57,19 @@ public class ClientNIO implements IServer {
 
     @Override
     public void running() throws CannotRunSocketChannel {
-        if (Optional.ofNullable(socketChannel).isEmpty() ||  !socketChannel.isOpen()) {
+        if (Optional.ofNullable(socketChannel).isEmpty() || !socketChannel.isOpen()) {
             throw new CannotRunSocketChannel("Must be connected the socket channel before running");
         }
 
         while ( socketChannel.isOpen()) {
             logger.info(this::getHost);
             String message = scanner.nextLine();
+            logger.printf(Level.INFO,"cmd -> %s", message);
 
-            if (isStop(message)) this.shutDown();
+            if (isStop(message)) {
+                this.shutDown();
+                break;
+            }
 
             this.write(message);
             String response = this.read();

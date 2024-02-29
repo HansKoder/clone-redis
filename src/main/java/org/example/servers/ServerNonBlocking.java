@@ -10,6 +10,7 @@ public class ServerNonBlocking {
 
         serverNIO.connect();
         serverNIO.running();
+        serverNIO.shutDown();
     }
 
 }
