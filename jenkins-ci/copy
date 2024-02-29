@@ -29,3 +29,4 @@ volumes:
    sonarqube-data:
    sonarqube-extensions:
    sonarqube-postgresql-data:
+

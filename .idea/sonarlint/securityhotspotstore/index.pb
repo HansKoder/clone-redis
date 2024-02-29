@@ -68,3 +68,13 @@ h
 8src/main/java/org/example/servers/ServerNonBlocking.java,b/c/bc05db7ff68cda41d89781922a38102d37c68b2e
 R
 "src/test/java/store/CacheTest.java,3/9/39dbed8788fded5af78ea7aa24e1ad1d7244ea92
+M
+jenkins-ci/docker-compose.yml,0/e/0e70dd22b2e83a4a20ec3847beea2ce2f4c87fae
+?
+jenkins-ci/copy,a/4/a47c76a3bbd294b6a5c7d34b0f5018c185f6e1e8
+S
+#jenkins-ci/jenkins_home/Jenkinsfile,0/3/03c58caaaa1fa103d306c23ada1b7cc258eddc58
+;
+Jenkinsfile,0/c/0c2c5c506cef0ed2d3ad2b7e45e97980b66f5520
+@
+scripts/sonar.sh,4/e/4e78bd0c57c0da0a05cb0145691bb6f118f45d1a
