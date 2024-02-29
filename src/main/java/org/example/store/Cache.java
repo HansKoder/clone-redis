@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Cache {
 
-    private HashMap<String, String> map = new HashMap<>();
+    private final HashMap<String, String> map = new HashMap<>();
     private static Cache instance;
 
     public void set (String key, String value) {
@@ -16,9 +16,7 @@ public class Cache {
     }
 
     public static Cache getInstance () {
-        if (Cache.instance == null) {
-            Cache.instance = new Cache();
-        }
+        if (Cache.instance == null)  Cache.instance = new Cache();
 
         return Cache.instance;
     }
