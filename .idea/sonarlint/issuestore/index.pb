@@ -78,3 +78,5 @@ S
 Jenkinsfile,0/c/0c2c5c506cef0ed2d3ad2b7e45e97980b66f5520
 @
 scripts/sonar.sh,4/e/4e78bd0c57c0da0a05cb0145691bb6f118f45d1a
+T
+$jenkins-ci/jenkins-docker/Dockerfile,c/1/c1153f41f98c8359c419a76313063858d3bb5a71

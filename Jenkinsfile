@@ -13,6 +13,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh './gradlew test'
+                sh './gradlew testCodeCoverageReport'
             }
         }
     }
