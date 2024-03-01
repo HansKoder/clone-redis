@@ -17,7 +17,7 @@ pipeline {
         stage('Publish Coverage Report') {
             steps {
                 // Publish JaCoCo coverage report to Jenkins
-                // jacoco(execPattern: 'build/jacoco/test.exec')
+                jacoco(execPattern: 'build/jacoco/test.exec')
                 publishHTML(target: [reportDir: 'build/reports/jacoco/testCodeCoverageReport/html', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'], keepAll: true, reportTitle: 'JaCoCo Code Coverage')
             }
         }
