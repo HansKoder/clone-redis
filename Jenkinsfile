@@ -2,15 +2,23 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
+                // Clean and build the project using Gradle
                 sh './gradlew clean build'
             }
         }
+
         stage('Test') {
             steps {
                 // Run tests and generate JaCoCo coverage report
-                sh './gradlew test testCodeCoverageReport'
+                sh './gradlew test jacocoTestReport'
             }
         }
 
@@ -18,7 +26,7 @@ pipeline {
             steps {
                 // Publish JaCoCo coverage report to Jenkins
                 jacoco(execPattern: 'build/jacoco/test.exec')
-                publishHTML(target: [reportDir: 'build/reports/jacoco/testCodeCoverageReport/html', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'], keepAll: true, reportTitle: 'JaCoCo Code Coverage')
+                publishHTML(target: [reportDir: 'build/reports/jacoco/test', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'], keepAll: true, reportTitle: 'JaCoCo Code Coverage')
             }
         }
     }
