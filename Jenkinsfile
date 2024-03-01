@@ -26,7 +26,14 @@ pipeline {
             steps {
                 // Publish JaCoCo coverage report to Jenkins
                 jacoco(execPattern: 'build/jacoco/test.exec')
-                publishHTML(target: [reportDir: 'build/reports/jacoco/test', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'], keepAll: true, reportTitle: 'JaCoCo Code Coverage')
+                // publishHTML(target: [reportDir: 'build/reports/jacoco/test', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'], keepAll: true, reportTitle: 'JaCoCo Code Coverage')
+                publishHTML (target : [allowMissing: false,
+                 alwaysLinkToLastBuild: true,
+                 keepAll: true,
+                 reportDir: 'build/reports/jacoco/test',
+                 reportFiles: 'index.html',
+                 reportName: 'example',
+                 reportTitles: 'example'])
             }
         }
     }
