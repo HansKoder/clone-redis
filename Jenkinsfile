@@ -36,17 +36,21 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-                    steps {
-                        // Run SonarQube analysis
-                        script {
-                            def scannerHome = tool 'SonarQube Scanner'
-                            withSonarQubeEnv('SonarQube') {
-                                sh "${scannerHome}/bin/sonar-scanner"
-                            }
-                        }
-                    }
-                }
+         stage('SonarQube analysis') {
+             environment {
+             SCANNER_HOME = tool 'Sonar-scanner'
+             }
+             steps {
+                 withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube-scanner') {
+                     sh '''$SCANNER_HOME/bin/sonar-scanner \
+                     -Dsonar.projectKey=redis-clone \
+                     -Dsonar.projectName=redis-clone \
+                     -Dsonar.sources=src/ \
+                     -Dsonar.projectVersion=${BUILD_NUMBER} '''
+                 }
+             }
+         }
+
     }
 
     post {
