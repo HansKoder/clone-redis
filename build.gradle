@@ -28,6 +28,7 @@ test {
     useJUnitPlatform()
 }
 
+// test coverage report
 tasks.named('check') {
     dependsOn tasks.named('testCodeCoverageReport', JacocoReport)
 }
