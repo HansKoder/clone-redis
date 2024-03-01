@@ -56,12 +56,6 @@ h
 0src/main/java/org/example/servers/ClientNIO.java,9/8/98c3e24452462072f54567b351987ad6bc26656a
 `
 0src/test/java/servers/ClientNonBlockingTest.java,c/2/c208534741ac3cbdff720d73face001b36adee3e
-[
-+src/main/java/org/example/labs/Example.java,6/8/6897000f6b5400c15e27479697f01a23859b7166
-W
-'src/main/java/org/example/labs/Tax.java,6/6/664d72ac66f3e7d16d818f20b939bc13c75735d2
-Z
-*src/main/java/org/example/labs/Employ.java,5/8/58405180c699975bba0f7988549d4e8622b7e2a1
 `
 0src/test/java/servers/ServerNonBlockingTest.java,4/d/4da83a581f2f780c23f348783701eb61a5fc2d9a
 h
@@ -70,13 +64,13 @@ R
 "src/test/java/store/CacheTest.java,3/9/39dbed8788fded5af78ea7aa24e1ad1d7244ea92
 M
 jenkins-ci/docker-compose.yml,0/e/0e70dd22b2e83a4a20ec3847beea2ce2f4c87fae
-?
-jenkins-ci/copy,a/4/a47c76a3bbd294b6a5c7d34b0f5018c185f6e1e8
-S
-#jenkins-ci/jenkins_home/Jenkinsfile,0/3/03c58caaaa1fa103d306c23ada1b7cc258eddc58
 ;
 Jenkinsfile,0/c/0c2c5c506cef0ed2d3ad2b7e45e97980b66f5520
 @
 scripts/sonar.sh,4/e/4e78bd0c57c0da0a05cb0145691bb6f118f45d1a
-T
-$jenkins-ci/jenkins-docker/Dockerfile,c/1/c1153f41f98c8359c419a76313063858d3bb5a71
+K
+jenkins-ci/sonar.properties,f/4/f4c3c0f7d81904431e833c41b10a2827b9448ad4
+R
+"jenkins-ci/test/docker-compose.yml,d/5/d5088d93a3bbdc559887fbfd0717c2951950771e
+S
+#jenkins-ci/sonar/docker-compose.yml,c/5/c5c82241cd780c522791335c4d3905d46d4fe96a

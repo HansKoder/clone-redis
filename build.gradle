@@ -20,8 +20,11 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.16.0'
 }
 
-tasks.sonar {
-    dependsOn(tasks.check)
+sonar {
+    properties {
+        property "sonar.projectKey", "redis-clone"
+        property "sonar.projectName", "redis-clone"
+    }
 }
 
 test {
