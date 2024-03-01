@@ -37,10 +37,16 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-              sh "./gradlew sonar"
-            }
-          }
+                    steps {
+                        // Run SonarQube analysis
+                        script {
+                            def scannerHome = tool 'SonarQube Scanner'
+                            withSonarQubeEnv('SonarQube') {
+                                sh "${scannerHome}/bin/sonar-scanner"
+                            }
+                        }
+                    }
+                }
     }
 
     post {

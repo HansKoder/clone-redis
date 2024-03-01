@@ -1,6 +1,10 @@
 #!/bin/bash
 
-./gradlew sonar   -Dsonar.projectKey=clone-redis   -Dsonar.projectName='clone-redis'   -Dsonar.host.url=http://localhost:9010   -Dsonar.token=sqp_dbd21d2d0e998cee4e6ee11b42a413fe035fd680
+./gradlew sonar \
+  -Dsonar.projectKey=redis-clone \
+  -Dsonar.projectName='redis-clone' \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.token=sqp_e831d5d5e119ee183c6ba21bc97a82b723ef6431
 
 if [ $? -eq 0 ] ;
 then
